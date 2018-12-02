@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.dao.ScenicMapper">
+  <resultMap id="BaseResultMap" type="com.www.pojo.Scenic">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sc_name" jdbcType="VARCHAR" property="scName" />
+    <result column="sc_loca_id" jdbcType="INTEGER" property="scLocaId" />
+    <result column="sc_desc" jdbcType="VARCHAR" property="scDesc" />
+    <result column="sc_remark" jdbcType="VARCHAR" property="scRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sc_name, sc_loca_id, sc_desc, sc_remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scenic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scenic
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.www.pojo.Scenic">
+    insert into scenic (id, sc_name, sc_loca_id, 
+      sc_desc, sc_remark)
+    values (#{id,jdbcType=INTEGER}, #{scName,jdbcType=VARCHAR}, #{scLocaId,jdbcType=INTEGER}, 
+      #{scDesc,jdbcType=VARCHAR}, #{scRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.www.pojo.Scenic">
+    insert into scenic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="scName != null">
+        sc_name,
+      </if>
+      <if test="scLocaId != null">
+        sc_loca_id,
+      </if>
+      <if test="scDesc != null">
+        sc_desc,
+      </if>
+      <if test="scRemark != null">
+        sc_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scName != null">
+        #{scName,jdbcType=VARCHAR},
+      </if>
+      <if test="scLocaId != null">
+        #{scLocaId,jdbcType=INTEGER},
+      </if>
+      <if test="scDesc != null">
+        #{scDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="scRemark != null">
+        #{scRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.www.pojo.Scenic">
+    update scenic
+    <set>
+      <if test="scName != null">
+        sc_name = #{scName,jdbcType=VARCHAR},
+      </if>
+      <if test="scLocaId != null">
+        sc_loca_id = #{scLocaId,jdbcType=INTEGER},
+      </if>
+      <if test="scDesc != null">
+        sc_desc = #{scDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="scRemark != null">
+        sc_remark = #{scRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.www.pojo.Scenic">
+    update scenic
+    set sc_name = #{scName,jdbcType=VARCHAR},
+      sc_loca_id = #{scLocaId,jdbcType=INTEGER},
+      sc_desc = #{scDesc,jdbcType=VARCHAR},
+      sc_remark = #{scRemark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
