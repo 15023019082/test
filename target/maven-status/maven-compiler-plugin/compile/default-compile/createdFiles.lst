@@ -1,0 +1,4 @@
+com\www\dao\TourMapper.class
+com\www\dao\UserMapper.class
+com\www\pojo\Tour.class
+com\www\pojo\User.class
